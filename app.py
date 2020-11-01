@@ -25,8 +25,6 @@ datatype = {
     'Duration': int,
     'Purpose': str}
 
-model = load("pipeline_lr.joblib")
-
 @app.route('/')
 def home():
     return render_template("home.html")
@@ -58,5 +56,5 @@ if __name__ == '__main__':
         return X
     def fill_na(X):
         return X.replace(np.nan, "unknown")
-   
+    model = load("pipeline_lr.joblib")
     app.run(debug=True)
