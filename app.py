@@ -1,15 +1,7 @@
 from flask import Flask,request, render_template, jsonify
 from joblib import load
-import pandas as pd
-import numpy as np
+from function_transformer import *
 
-from sklearn.preprocessing import FunctionTransformer, LabelBinarizer, OneHotEncoder, MinMaxScaler
-from sklearn.impute import SimpleImputer
-from sklearn.compose import make_column_transformer, make_column_selector
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
-from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
 
 app = Flask(__name__)
 
@@ -24,15 +16,6 @@ datatype = {
     'Credit amount': int,
     'Duration': int,
     'Purpose': str}
-
-def categorize_age(X):
-    X['Age_cat'] = pd.cut(X.Age, (18, 25, 35, 60, 120), labels=['Baby', 'Young', 'Adult', 'Senior'])
-    return X
-
-
-def fill_na(X):
-    return X.replace(np.nan, "unknown")
-
 
 model = load("pipeline_lr.joblib")
 
